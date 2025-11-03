@@ -3,10 +3,8 @@ A chatbot with Natural Language Processing capabilities.
 Uses NLTK for text processing and sklearn for intent classification.
 """
 
-import json
 import nltk
 import numpy as np
-import pickle
 import re
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer
