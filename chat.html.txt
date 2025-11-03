@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatBot</title>
+    <style>
+        body {
+            background: #f1f1f1;
+            font-family: Arial;
+            text-align: center;
+            padding-top: 50px;
+        }
+        #chatbox {
+            width: 400px;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+        #userInput {
+            width: 80%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+        #chatlog {
+            height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .user { color: blue; }
+        .bot { color: green; }
+    </style>
+</head>
+<body>
+    <div id="chatbox">
+        <h2>🤖 Chat with your Bot</h2>
+        <div id="chatlog"></div>
+        <input id="userInput" type="text" placeholder="Type a message..." />
+        <button onclick="send()">Send</button>
+    </div>
+
+    <script>
+        async function send() {
+            const msg = document.getElementById("userInput").value;
+            const chatlog = document.getElementById("chatlog");
+            chatlog.innerHTML += `<div class='user'><b>You:</b> ${msg}</div>`;
+            document.getElementById("userInput").value = "";
+
+            const response = await fetch(`/get?msg=${msg}`);
+            const data = await response.text();
+            chatlog.innerHTML += `<div class='bot'><b>Bot:</b> ${data}</div>`;
+            chatlog.scrollTop = chatlog.scrollHeight;
+        }
+    </script>
+</body>
+</html>

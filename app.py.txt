@@ -1,0 +1,36 @@
+from flask import Flask, render_template, request
+from datetime import datetime
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("chat.html")
+
+@app.route("/get")
+def get_bot_response():
+    user = request.args.get('msg').lower()
+
+    if user in ["hi", "hello", "hey"]:
+        return "Hello there! How are you doing today?"
+    elif user in ["i'm fine", "i am fine", "good", "great"]:
+        return "Glad to hear that! 😊"
+    elif user == "how are you":
+        return "I'm doing great! Thanks for asking 😄"
+    elif "your name" in user:
+        return "I'm chatBot, made by you!"
+    elif "weather" in user:
+        return "I can't check live weather yet, but I hope it's sunny where you are ☀️"
+    elif "joke" in user:
+        return "Why did the computer go to the doctor? Because it had a virus! 😂"
+    elif "who made you?" in user:
+        return "Ankit :)"
+    elif "time" in user:
+        return f"The current time is {datetime.now().strftime('%H:%M:%S')}"
+    elif user == "bye":
+        return "Goodbye! Have a wonderful day! 👋"
+    else:
+        return "Hmm... I didn't quite get that. Can you say it differently?"
+
+if __name__ == "__main__":
+    app.run(debug=True)
