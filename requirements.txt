@@ -1,3 +1,8 @@
 nltk==3.8.1
 numpy>=1.24.0
 scikit-learn>=1.3.0
+
+# DistilBERT text classification project
+torch>=2.0.0
+transformers>=4.35.0
+datasets>=2.14.0
